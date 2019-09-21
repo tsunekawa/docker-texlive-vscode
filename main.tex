@@ -1,0 +1,76 @@
+\documentclass[autodetect-engine,twocolumn,a4paper]{jsarticle}
+\usepackage[noto]{pxchfon}
+
+\makeatletter
+\renewcommand{\maketitle}{\par
+\begingroup
+  \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+  \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+  \long\def\@makefntext##1{\advance\leftskip 3zw
+    \parindent 1zw\noindent
+    \llap{\@textsuperscript{\normalfont\@thefnmark}\hskip0.3zw}##1}%
+  \if@twocolumn
+    \ifnum \col@number=\@ne
+      \@maketitle
+    \else
+      \twocolumn[\@maketitle]%
+    \fi
+  \else
+    \newpage
+    \global\@topnum\z@  % Prevents figures from going at top of page.
+    \@maketitle
+  \fi
+  \plainifnotempty
+  \@thanks
+\endgroup
+\setcounter{footnote}{0}%
+\global\let\thanks\relax
+\global\let\maketitle\relax
+\global\let\@thanks\@empty
+\global\let\@author\@empty
+\global\let\@date\@empty
+\global\let\@title\@empty
+\global\let\title\relax
+\global\let\author\relax
+\global\let\date\relax
+\global\let\and\relax
+}
+\def\@maketitle{%
+\newpage\null
+\vskip 2em
+\begin{center}%
+  \let\footnote\thanks
+  {\LARGE \@title \par}%
+  \vskip 1.5em
+  {\large
+    \lineskip .5em
+    \begin{tabular}[t]{c}%
+      \@author
+    \end{tabular}\par}%
+  \vskip 1em
+  {\large \@date}%
+\end{center}%
+\par\vskip 1.5em
+\ifvoid\@abstractbox\else\centerline{\box\@abstractbox}\vskip1.5em\fi
+}
+\makeatother
+
+\title{test}
+\author{test author}
+\date{\today}
+\begin{document}
+
+\begin{abstract}
+test
+\\
+\\
+Test
+\end{abstract}
+
+\maketitle
+
+test
+
+\bibliographystyle{plain}
+\bibliography{reference}
+\end{document}
